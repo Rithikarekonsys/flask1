@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List</h1>
+
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <strong>Date:</strong> {{ task.date }}<br>
+            <strong>Description:</strong> {{ task.description }}<br>
+            <strong>Assignee:</strong> {{ task.assignee }}<br>
+            <strong>Completed:</strong> {% if task.completed %}Yes{% else %}No{% endif %}<br>
+            <form action="{{ url_for('update_completed', task_id=task['_id']) }}" method="POST">
+                <strong>Status:</strong>
+                <select name="status" onchange="this.form.submit()">
+                    <option value="completed" {% if task.completed %} selected {% endif %}>Completed</option>
+                    <option value="pending" {% if not task.completed %} selected {% endif %}>Pending</option>
+                </select>
+            </form>
+            <form action="{{ url_for('edit_task', task_id=task['_id']) }}" method="GET">
+                <button type="submit">Edit</button>
+            </form>
+            <form action="{{ url_for('delete_task', task_id=task['_id']) }}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{{ url_for('index') }}">Add Task</a>
+</body>
+</html>

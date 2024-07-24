@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+</head>
+<body>
+    <h1>Add Task</h1>
+    <form action="/add_task" method="post">
+        <label for="task_date">Date:</label>
+        <!-- Date input with date picker -->
+        <input type="date" id="task_date" name="task_date" required><br><br>
+        
+        <label for="task_description">Description:</label><br>
+        <textarea id="task_description" name="task_description" rows="3" cols="50" required></textarea><br><br>
+        
+        <label for="task_assignee">Assignee:</label>
+        <select id="task_assignee" name="task_assignee" required>
+            <option value="">Select Assignee</option>
+            <option value="employee1">Employee 1</option>
+            <option value="employee2">Employee 2</option>
+            <option value="employee3">Employee 3</option>
+            <!-- Add more options as needed -->
+        </select><br><br>
+        
+        <input type="submit" value="Add Task">
+        
+        <!-- Link to view all tasks -->
+        <a href="{{ url_for('view_tasks') }}">All Tasks</a>
+    </form>
+</body>
+</html>
